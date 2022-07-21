@@ -1,0 +1,297 @@
+<div class="product-container">
+    <div class="col_prdetails">
+        <div id="content-wrapper">
+            <div class="popup" id="popup-1">
+                <div class="overlay">
+
+                </div>
+                <div class="content">
+                    <div class="close-btn" onclick="togglePopup()">&times;</div>
+                    <img src="{{records.c_FolderName}}/{{records.c_mainImageName}}" id="popupImage"  >
+                    {{!-- <p>
+                        <BUtton type=" button" onclick="zoomin()">ZOOM UP(+)</BUtton>
+                    <BUtton type="button" onclick="zoomout()">ZOOM OUT(-)</BUtton>
+                    </p> --}}
+
+                    <div class="sliderWitharrow">
+                        <img src="/images/arrow-left.png" class="arrow-popup" id="slideLeft-popup" alt="">
+                        <div id="slider-popup">
+                            {{#each imageList as |item i|}}
+                            {{#iif i '==' 0}}
+                            <img class="thumbnail-popup active-popup" src="{{src}}">
+                            {{else}}
+                            <img class="thumbnail-popup" src="{{src}}">
+                            {{/iif}}
+                            {{/each}}
+                            {{!-- <img class="thumbnail active" src="/images/uploads/1/logo2.png" alt="">
+                            <img class="thumbnail" src="/images/uploads/1/logo4.png" alt="">
+                            <img class="thumbnail" src="/images/uploads/1/menu.png" alt="">
+                            <img class="thumbnail" src="/images/uploads/1/shopping-cart.png" alt="">
+                            <img class="thumbnail"
+                                src="/images/uploads/6/WhatsApp Image 2022-01-31 at 6.30.45 PM (1).jpeg" alt="">
+                            <img class="thumbnail" src="/images/uploads/6/WhatsApp Image 2022-01-31 at 6.30.45 PM.jpeg"
+                                alt="">
+                            <img class="thumbnail" src="/images/racket1/WhatsApp Image 2022-01-31 at 6.31.09 PM.jpeg"
+                                alt="">
+                            <img class="thumbnail" src="/images/racket1/WhatsApp Image 2022-01-31 at 6.31.08 PM.jpeg"
+                                alt="">
+                            <img class="thumbnail" src="/images/racket1/WhatsApp Image 2022-01-31 at 6.31.07 PM.jpeg"
+                                alt=""> --}}
+                        </div>
+                        <img src="/images/arrow-right.png" class="arrow-popup" id="slideRight-popup" alt="">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="column">
+                {{!-- <button onclick="togglePopup()">show screen</button> --}}
+                <img src="{{records.c_FolderName}}/{{records.c_mainImageName}}" id='featured' onclick="togglePopup()">
+
+                <div id="slide-wrapper">
+                    <img src="/images/arrow-left.png" class="arrow" id="slideLeft" alt="">
+                    <div id="slider">
+                        {{#each imageList as |item i|}}
+                        {{#iif i '==' 0}}
+                        <img class="thumbnail active" src="{{src}}">
+                        {{else}}
+                        <img class="thumbnail " src="{{src}}">
+                        {{/iif}}
+                        {{/each}}
+                        {{!-- <img class="thumbnail active" src="/images/uploads/1/logo2.png" alt="">
+                        <img class="thumbnail" src="/images/uploads/1/logo4.png" alt="">
+                        <img class="thumbnail" src="/images/uploads/1/menu.png" alt="">
+                        <img class="thumbnail" src="/images/uploads/1/shopping-cart.png" alt="">
+                        <img class="thumbnail" src="/images/uploads/6/WhatsApp Image 2022-01-31 at 6.30.45 PM (1).jpeg"
+                            alt="">
+                        <img class="thumbnail" src="/images/uploads/6/WhatsApp Image 2022-01-31 at 6.30.45 PM.jpeg"
+                            alt="">
+                        <img class="thumbnail" src="/images/racket1/WhatsApp Image 2022-01-31 at 6.31.09 PM.jpeg"
+                            alt="">
+                        <img class="thumbnail" src="/images/racket1/WhatsApp Image 2022-01-31 at 6.31.08 PM.jpeg"
+                            alt="">
+                        <img class="thumbnail" src="/images/racket1/WhatsApp Image 2022-01-31 at 6.31.07 PM.jpeg"
+                            alt=""> --}}
+                    </div>
+                    <img src="/images/arrow-right.png" class="arrow" id="slideRight" alt="">
+
+                </div>
+            </div>
+
+            <div class="column2">
+                <h2 id="c_Rkt_Name">{{records.c_Rkt_Name}}</h2>
+                <input type="text" hidden name="id" id="id" value={{records._id}}>
+
+                    {{!--
+                    <hr>
+                    --}}
+
+                    {{!-- <img src={{ifCondRating records.i_condrating_Id }} id="condrating"> --}}
+                    <div  id="condrating" >Condition: <span style="color: #1E8FD5;"> {{condRating.i_Cond_Rating}}/10</span> </div>
+                    <h4 id="headingprice">Price {{records.i_Price}}</h3>
+                        <div>Head Size(Inches) : {{records.i_HeadSize}}</div>
+                        <div>UnStrung Weight(Grms) : {{records.i_Weight_Un_St}}</div>
+                        <div>Grip Size : {{records.i_GripSize}}</div>
+                        <div>Length : {{records.i_Length}}</div>
+
+                        {{!-- <input type="number" value="" id="input-cart" style="text-align: right"> --}}
+                        <div style="display: flex">
+                            
+                            <form action="/remove-from-cart" method="POST"  name="form" id="minusform">
+                               <button type="submit" id="minus" onclick="removeClick()" class="plusminusbutton" >-</button>
+                                <input type="hidden" id="id_cart" name="id_remvoe_cart" value={{records._id}}>
+                                {{!-- <div id="minus" class="plusminusbutton" onclick="removeclick()"><a href="/remove-from-cart">-</a></div> --}}
+                            </form>
+                            <div  id="input-cart" data-count={{cartItemwiseCount}} >
+                                {{cartItemwiseCount}}
+                            </div>
+                            <form action="/add-to-cart" method="POST"  name="form" id="plusform">
+                                {{!-- <button >+</button> --}}
+
+                                <button type="submit" id="plus" onclick="addClick()"class="plusminusbutton" >+</button>
+                                {{!-- <div id="plus" onclick="addClick()" class="plusminusbutton">+</div> --}}
+                                <input type="hidden" id="id_cart" name="id_cart" value={{records._id}}>
+                                <button type="submit" class="btn-cart" onclick="addClick()" id="addcartbtn">Add to cart</button>
+                            </form>
+                            {{!-- <div> --}}
+                                {{!-- <a href="" class="btn-cart" onclick="addClick()" id="addcartbtn">Add to cart</a> --}}
+                                
+
+                            {{!-- </div> --}}
+                       
+                        </div>
+            </div>
+
+            <div class="column">
+                <h3>Description</h3>
+
+                <div><b>{{records.c_Rkt_Desc}}</b></div>
+                <div>Manufacturer : {{Mnflist.c_Mnf}}</div>
+                {{!-- <div>Series : {{Serieslist.c_series}}</div>
+                
+                <div>Head Size(Inches) : {{records.i_HeadSize}}</div>
+                <div>UnStrung Weight(Grms) : {{records.i_Weight_Un_St}}</div>
+                <div>Grip Size : {{records.i_GripSize}}</div>
+                <div>Length : {{records.i_Length}}</div> --}}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let thumbnails = document.getElementsByClassName("thumbnail");
+    let activeImages = document.getElementsByClassName("active");
+
+    for (var i = 0; i < thumbnails.length; i++) {
+        thumbnails[i].addEventListener('mouseover', function () {
+            if (activeImages.length > 0) {
+                activeImages[0].classList.remove('active');
+            }
+
+            this.classList.add('active');
+            document.getElementById('featured').src = this.src;
+
+        })
+    }
+    let buttonRight = document.getElementById("slideRight");
+    let buttonLeft = document.getElementById("slideLeft");
+
+    buttonLeft.addEventListener('click', function () {
+        document.getElementById('slider').scrollLeft -= 180;
+
+    })
+
+    buttonRight.addEventListener('click', function () {
+        document.getElementById('slider').scrollLeft += 180;
+
+    })
+
+
+</script>
+<script>
+    function togglePopup() {
+        document.getElementById("popup-1").classList.toggle('active-popup1');
+    }
+</script>
+{{!-- popup slider --}}
+<script>
+    let thumbnailspopup = document.getElementsByClassName("thumbnail-popup");
+    let activeImagespopup = document.getElementsByClassName("active-popup");
+
+    for (var i = 0; i < thumbnailspopup.length; i++) {
+        thumbnailspopup[i].addEventListener('mouseover', function () {
+            if (activeImagespopup.length > 0) {
+                activeImagespopup[0].classList.remove('active-popup');
+            }
+
+            this.classList.add('active-popup');
+            document.getElementById('popupImage').src = this.src;
+
+        })
+    }
+    let buttonRightpopup = document.getElementById("slideRight-popup");
+    let buttonLeftpopup = document.getElementById("slideLeft-popup");
+
+    buttonLeftpopup.addEventListener('click', function () {
+        document.getElementById('slider-popup').scrollLeft -= 180;
+
+    })
+
+    buttonRightpopup.addEventListener('click', function () {
+        document.getElementById('slider-popup').scrollLeft += 180;
+
+    })
+
+
+</script>
+<script>
+    var noti=document.getElementById('cartcount');
+    var listArr=[];
+    var addbtn=document.getElementById('addcartbtn');
+    var inputcart=document.getElementById('input-cart');
+    {{!-- var cartarray=document.getElementById('cartarray'); --}}
+    {{!-- addcartbtn.addEventListener('click',function(){ --}}
+    function addClick(){
+        
+    
+    var add=Number(inputcart.getAttribute('data-count')||0);
+    var add_cartCount=Number(noti.getAttribute('data-count')||0);
+    listArr.push(document.getElementById('id').value);
+    
+    add=add+1;
+    add_cartCount=add_cartCount+1;
+    noti.setAttribute('data-count',add_cartCount);
+    inputcart.setAttribute('data-count',add);
+    inputcart.innerText=add;
+    console.log(add);
+    noti.classList.add('zero');
+
+    }
+    {{!-- remove from cart --}}
+    function removeClick(){
+        
+    
+            
+        var add=Number(inputcart.getAttribute('data-count')||0);
+        var add_cartCount=Number(noti.getAttribute('data-count')||0);
+        listArr.push(document.getElementById('id').value);
+        add=add-1;
+        add_cartCount=add_cartCount-1;
+    if (add<0){
+        
+        inputcart.setAttribute('data-count',0);
+        inputcart.innerText=0;
+    }else{
+        
+        inputcart.setAttribute('data-count',add);
+        inputcart.innerText=add;
+        console.log(add);
+    }
+    if ((add_cartCount)<0) {
+        noti.setAttribute('data-count',0);
+    }else{
+        noti.setAttribute('data-count',add_cartCount);
+    }
+    
+    {{!-- console.log('productdetails script' + inputcart.innerText) --}}
+    if (inputcart.innerText==""||inputcart.innerText==null){
+        noti.classList.remove('zero');
+
+    }
+    
+
+    }
+
+</script>
+<script>
+    var user=document.getElementById('user1');
+    var btn=document.getElementById('addcartbtn');
+    var minus=document.getElementById('minus');
+    let plus=document.getElementById('plus');
+    if (user.innerText=="" || user.innerText==null){
+        console.log('disabled' + user.innerText);        
+        btn.disabled=true;
+        minus.hidden=true;
+        plus.hidden=true;
+        inputcart.hidden=true;
+        btn.opacity=1;
+
+    }else{
+        console.log('enabled');
+        btn.disabled=false;
+        if (document.getElementById('input-cart').innerText==""||document.getElementById('input-cart').innerText==null){
+             minus.hidden=true;
+             plus.hidden=true;
+            inputcart.hidden=true;
+        }
+        else{
+            minus.hidden=false;
+            plus.hidden=false;
+            inputcart.hidden=false;
+        }
+        btn.opacity=0;
+    }
+
+
+</script>

@@ -1,0 +1,453 @@
+<div class="container">
+    {{!-- <h1>{{title}}</h1> --}}
+    {{!--
+    <hr> --}}
+    <div class="row">
+        <div class="col-md-6">
+            <form action="/upload" method="post" onsubmit="return validateForm()" enctype="multipart/form-data"
+                name="form">
+                {{!-- <div class="form-group">
+                    <input type="text" name="title" placeholder="Title">
+                </div> --}}
+                {{!-- <div style="margin-top:50px;">Add New Racket</div> --}}
+                <label for="" id="messageError" hidden style="color: red;height=300px;width:229px"></label>
+
+                <div class="form-group" name="formid">
+
+                    <div class="firstdiv">
+                        <input type="hidden" name="id">
+                        <div class="imageupload">
+                            <label for="productname" class="control-label">Name  </label>
+                            <input type="text"  name="c_Rkt_Name">
+                            <label for="" style="color: red;">*</label>
+                            
+                        </div>
+                        <div class="imageupload">
+                            <label class="control-label">Describe</label>
+                            <textarea name="c_Rkt_Desc" class="input-box" cols="30" rows="10"></textarea>
+                            <label for="" style="color: red;">*</label>
+                            {{!-- <input type="text" class="input-box" name="c_Rkt_Desc"
+                                placeholder="Describe the Product" value={{edit.c_Rkt_Desc}}> --}}
+                        </div>
+                        <div class="imageupload">
+                            <label for="price" class="control-label">Manufacturer</label>
+                            <div class="mnfselect">
+
+                                <select name="mnf" id="manufacturer" onchange="imagesDisplay()">
+                                    {{!-- <option disabled hidden selected>Select Manufacturer</option> --}}
+                                    {{#each Mnflist as |item i|}}
+                                    {{#if c_Mnf }}
+
+                                    <option value={{MnfId}} selected>{{c_Mnf}}</option>
+                                    {{/if}}
+                                    {{/each}}
+
+                                </select>
+                            </div>
+
+                            {{!-- <input type="number" class="input-box" name="c_Mnf" placeholder="Enter Selling Price">
+                            --}}
+                        </div>
+                        <div class="imageupload">
+                            <label for="price" class="control-label">Series</label>
+                            <div class="mnfselect">
+
+                                <select name="series" id="series">
+                                    {{!-- <option disabled hidden selected>Select Series</option> --}}
+                                    {{#each Serieslist as |item i|}}
+                                    {{#if c_series }}
+
+                                    <option value={{iseriesId}} selected>{{c_series}} {{iseriesId}}</option>
+                                    {{/if}}
+                                    {{/each}}
+
+                                </select>
+                            </div>
+
+
+                        </div>
+
+                        <div class="imageupload">
+                            <label for="price" class="control-label">Price</label>
+                            <input type="number" class="input-box" name="i_Price" placeholder="Enter Selling Price" id="i_Price">
+                            <label for="" style="color: red;">*</label>
+                        </div>
+                        <div class="imageupload">
+                            <label for="mrp" class="control-label">Condition Rating</label>
+                            <div class="mnfselect">
+
+                                <select class="" name="i_Cond_Rating">
+                                    {{!-- <option value="fa-solid fa-star-sharp">&#xe28b;one</option> --}}
+                                    {{#each condRating }}
+                                    {{!-- <option value={{i_condrating_Id}} data-imagesrc={{c_condrating_image}}>
+                                        {{i_Cond_Rating}}</option> --}}
+                                    <option value={{icondrating_Id}} selected>{{i_Cond_Rating}}</option>
+                                    {{/each}}
+                                    {{!-- <option data-content="<i class='fa fa-star checked' ></i>"></option>
+                                    <option data-content="<i class='fa fa-star checked' ></i>"></option> --}}
+                                </select>
+                            </div>
+                            {{!-- <input type="number" class="input-box" name="i_Cond_Rating"> --}}
+                        </div>
+                        <div class="imageupload">
+                            <label for="discount" class="control-label">Delivery Status</label>
+                            <div class="mnfselect">
+                                <select name="i_Delivery_Status" id="DeliveryStatus">
+
+                                    {{#each deliveryStatuslist as |item i|}}
+                                    {{#if c_Delivery_Status }}
+                                    {{!-- <option value={{i_Delivery_Status}} selected>{{c_Delivery_Status}}</option>
+                                    --}}
+                                    {{!-- <option value={{iseriesId}} selected>{{c_series}} {{iseriesId}}</option> --}}
+                                    <option value={{iDelivery_Status}} selected>{{c_Delivery_Status}}</option>
+                                    {{/if}}
+                                    {{/each}}
+                                </select>
+                            </div>
+                            {{!-- <input type="text" class="input-box" name="i_Delivery_Status"> --}}
+                        </div>
+                    </div>
+                    <div class="seconddiv">
+                        <div class="imageupload">
+                        </div>
+                        <div class="imageupload">
+                            <label for="productname" class="control-label">Head Size (Inches) </label>
+                            <input type="number" class="input-box" name="i_HeadSize" id="i_HeadSize">
+                            <label for="" style="color: red;">*</label>
+                        </div>
+                        <div class="imageupload">
+                            <label for="productname" class="control-label">Unstrung Weight (Grms) </label>
+                            <input type="number" class="input-box" name="i_Weight_Un_St" id="i_Weight_Un_St">
+                            <label for="" style="color: red;">*</label>
+                        </div>
+                        <div class="imageupload">
+                            <label for="productname" class="control-label">Length(Inches) </label>
+                            <input type="number" class="input-box" name="i_Length" id="i_Length">
+                            <label for="" style="color: red;">*</label>
+                        </div>
+                        <div class="imageupload">
+                            <label for="productname" class="control-label">Grip Size </label>
+                            {{!-- <input type="number" class="input-box" name="i_GripSize"> --}}
+                            <div class="gripsize_div">
+                                <select name="i_GripSize" id="i_GripSize" margin-left=10px>
+                                    <option disabled hidden selected>Select Grip Size</option>
+                                    <option value="0">L0=4 Inches</option>
+                                    <option value="1">L1 = 4 1/8 Inches</option>
+                                    <option value="2">L2 = 4 1/4 Inches</option>
+                                    <option value="3">L3 = 4 3/8 Inches</option>
+                                    <option value="4">L4 = 4 1/4 Inches</option>
+                                    <option value="5">L5 = 4 5/8 Inches</option>
+                                    <option value="6">L6 = 4 3/4 Inches</option>
+                                    <option value="7" selected>Unknown</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="imageupload">
+                            <label for="productname">Verification </label>
+                            {{!-- <input type="number" class="input-box" name="i_Ver_Status"> --}}
+                            <div class="verify_div">
+                                <select name="i_Ver_Status" id="i_Ver_Status" margin-left=10px>
+                                    <option disabled hidden selected>Select Verification </option>
+                                    <option value="1">Verified By us</option>
+                                    <option value="0" selected>Not Verified</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="imageupload">
+                            <label for="productname">Sales Status </label>
+                            {{!-- <input type="number" class="input-box" name="i_Ver_Status"> --}}
+                            <div class="salesSt_div">
+                                <select name="i_Sale_Status" id="i_Sale_Status" margin-left=10px>
+                                    <option disabled hidden selected>Select Sales Status</option>
+                                    <option value="1">Sold</option>
+                                    <option value="0" selected>Available</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="imageupload">
+                            <label for="price" class="control-label">Racket Model</label>
+                            <div class="rktmodel">
+
+                                <select name="i_Raket_Model_Id" id="i_Raket_Model_Id">
+                                    <option disabled hidden selected>Select Model</option>
+                                    {{#each Modellist as |item i|}}
+                                    {{#if c_Raket_Model }}
+
+                                    <option value={{i_Raket_Model_Id}} selected>{{c_Raket_Model}}</option>
+                                    {{/if}}
+                                    {{/each}}
+
+                                </select>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                        <div class="card">
+                            <div class="top">
+                                <p>Drag & drop image uploading</p>
+                                {{!-- <button type="button">Upload</button> --}}
+                            </div>
+                            {{!-- <form action="/uploadimage" method="post" class="formImage"> --}}
+                            <div  class="formImage">
+                                <span class="inner">Drag & drop image here or <span class="select">Browse</span></span>
+                                <input name="pimage1" type="file"  class="fileimage" multiple />
+                            {{!-- </form> --}}
+                            </div>
+                            <div class="containerImg"></div>
+                        </div>
+
+                    {{!-- <div class="container-image">
+                        <label for="" style="text-align:center">Upload Photo</label>
+                        <div class="imgbtn">
+                            
+                            <input type="file" id="file-input" name="pimage1" onchange="preview()" 
+                                accept="image/.gif,.jpg,.jpeg,.png" multiple hidden/>
+                            <label for="file-input" id="imgLabel"><i class="fas fa-upload"></i></label>
+                            <p id="num-of-files" hidden>No Files Choosen </p>
+                        </div>
+                        <div id="images">
+
+                        </div>
+
+                    </div> --}}
+
+                </div>
+                <div class="btnlabel">
+                    <button type="submit" class="btnSave" id="btnsubmit">Save</button>
+                    <label for="" id="savemessage" style="color: red;" >{{savemessage}}</label>
+                </div>
+                {{!-- saya --}}
+            </form>
+
+        </div>
+    </div>
+</div>
+{{!-- list --}}
+<div class="container">
+    <div class="row_upload">
+        <h2>
+            {{ title }}
+        </h2>
+        <table class="table table-striped table-primary">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Manufacturer</th>
+                    <th>Series</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                    {{!-- <th>Delivery Status</th> --}}
+                    {{!-- <th>Other</th> --}}
+                    <th>Image</th>
+
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{!-- {{#if records.length>0}} --}}
+                {{#each records }}
+                <tr class="racketgrid-row">
+                    <td>
+                        {{c_Mnf}} - {{c_Rkt_Name}}
+                    </td>
+                    <td id="rkt_desc">
+                        {{c_Rkt_Desc}}
+                    </td>
+
+                    <td>
+                        {{c_Mnf}} 
+                    </td>
+                    <td>
+                        {{c_series}}
+                    </td>
+                    <td>
+                        {{i_Price}}
+                    </td>
+                    <td>
+                        {{i_Cond_Rating}}/10
+                    </td>
+                    {{!-- <td>
+                        {{i_Delivery_Status}}
+                    </td> --}}
+                    <td>
+                        {{#if c_FolderName }}
+                        <img src="{{c_FolderName}}/{{c_mainImageName}}" alt="image" width="80">
+                        {{/if}}
+                    </td>
+
+                    <td><a id="btnedit"  href="/edit/{{_id}}">Edit</a>
+                        <a id="btnedit"  href="/delete/{{_id}}">Delete</a>
+                    </td>
+                    {{!-- <td>
+                        {{rating}}
+                    </td> --}}
+                </tr>
+                {{/each}}
+                {{!-- {{else}}
+                <tr>
+                    <td colspan="6">No Record Found</td>
+
+                </tr>
+                {{/if}} --}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function preview_2(what) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+
+            document.getElementById("photo1").src = URL.createObjectURL(e.target.file[0]);
+
+        };
+
+
+        reader.readAsDataURL(what.files[0]);
+    }
+
+</script>
+<script>
+    let fileInput = document.getElementById("file-input");
+    let imageContainer = document.getElementById("images");
+    let numOfFiles = document.getElementById("num-of-files");
+
+    // console.log(fileInput,imageContainer,numOfFiles);
+
+    function preview() {
+        imageContainer.innerHTML = "";
+
+        numOfFiles.textContent = `${fileInput.files.length}
+        Files Selected`;
+        var fileCount = 0;
+        var RowCountImage = 1;
+
+        //{ { !--console.log(divName); --} }
+        let divName = document.createElement("row" + RowCountImage);
+        imageContainer.append(divName)
+        let count = 1;
+        for (i of fileInput.files) {
+            fileCount += 1;
+            //{{!-- { { !--console.log(i.length); --} } --}}
+            if (fileCount <= 15) {
+
+
+                let reader = new FileReader();
+                let figure = document.createElement("figure");
+                let figCap = document.createElement("figCaption");
+
+                figCap.innerText = i.name;
+                figCap.hidden = true;
+                figure.appendChild(figCap);
+                reader.onload = () => {
+                    let img = document.createElement("img");
+                    img.setAttribute("src", reader.result);
+                    img.setAttribute("class", 'uploadImage');
+
+                    figure.insertBefore(img, figCap);
+                }
+                
+                if (RowCountImage == 6) {
+
+                    divName = document.createElement("row" + count);
+                    count += 1;
+                    imageContainer.append(divName)
+                    RowCountImage = 1;
+                }
+
+                divName.append(figure);
+                reader.readAsDataURL(i);
+                RowCountImage = RowCountImage + 1;
+            }
+            else {
+              //  { { !--alert("Allowed only 15 files to Upload"); --} }
+            }
+        }
+
+    }
+</script>
+<script>
+    let user2 = document.getElementById('user1');
+    let btnSave = document.getElementById('btnsubmit');
+    var textuser = user2.innerHTML;
+    let savemessage = document.getElementById('savemessage');
+
+    if (textuser == "" || textuser == undefined || textuser == null) {
+        savemessage.innerText = ' Login Required to upload racket to sell.';
+        savemessage.hidden = false;
+        btnSave.disabled = true;
+    } else {
+        savemessage.innerText = "";
+        savemessage.hidden = true;
+        btnSave.disabled = false;
+    }
+
+</script>
+<script>
+    //const form = document.getElementsByName("form"); --} } --}}
+    const  c_Rkt_Name = document.forms["form"]["c_Rkt_Name"];
+    const c_Rkt_Desc = document.forms["form"]["c_Rkt_Desc"];
+    const i_HeadSize =document.forms["form"]["i_HeadSize"];
+    const i_Weight_Un_St = document.forms["form"]["i_Weight_Un_St"];
+    const i_Length = document.forms["form"]["i_Length"];
+
+    let price = document.getElementById('i_Price');
+    const filename = document.forms["form"]["pimage1"];
+    var messageError = document.getElementById('messageError');
+    messageError.innerText="Pls enter ";
+    let isError = false;
+    function validateForm() {
+        
+        if (c_Rkt_Name.value == "" || c_Rkt_Name.value == null) {
+            messageError.hidden = false;
+            messageError.innerText =messageError.innerText + " Racket Name ";
+            isError = true;
+
+            //return false;
+        }
+
+        if (c_Rkt_Desc.value == "" || c_Rkt_Desc.value == null) {
+
+            messageError.hidden = false;
+            if (isError == true) {
+                messageError.innerText = messageError.innerText + ",";
+            }
+            isError = true;
+            messageError.innerText = messageError.innerText + " Description of Racket ";
+
+
+        }
+       
+       if (i_HeadSize.value == "" || i_HeadSize.value == null) {
+            messageError.hidden = false;
+            if (isError == true) {
+                messageError.innerText = messageError.innerText + ",";
+            }
+            isError = true;
+            messageError.innerText = messageError.innerText + " Head Size ";
+
+        }
+ 
+        
+         if (isError == true) {
+            alert(messageError.innerText);
+            return false;
+
+        }
+
+  
+     //console.log(filename.files.length);
+        if (filename.files.length == 0) {
+            alert("Select Files");
+            return false;
+        }
+        messageError.hidden = true;
+        //return true;
+    };
+
+</script>

@@ -1,0 +1,524 @@
+{{!-- <div class="col_2">
+    <img src="images/logo.png" height="5%" width="25%">
+    <div class="heading1">
+        <h1>Fulfill Your Passion! </h1>
+    </div>
+</div> --}}
+
+<div class="ft-maincontainer">
+    {{!-- <form action="/product" method="POST" role="form" enctype="multipart/form-data" name="form"> --}}
+        <form action="/removesearch" method="POST" role="form" id="form-removesearch"></form>
+        </form>
+        <form action="/search" method="POST" role="form">
+
+            <div>
+                {{!-- <a href="" class="btn-search">Search</a> --}}
+                {{!-- <input type="text" name="customerName" value="Sayali"> --}}
+                {{!-- <input type="text" class="serachCondition" name="serachstring" id="serachCond" value=[]> --}}
+                {{!-- <input type="text" class="serachCondition" name="serach" id="serachCond" value="0"> --}}
+                <label for="" id="OnChange"></label>
+                <button type="submit" class="btn-cart" value="submit" name="submit" onclick="onChange()">Apply Fliter</button>
+                
+                    <button type="submit" class="btn-cart" value="submit" onclick="Removefilter()" form="form-removesearch" name="submit" >Remove Fliter</button>
+                
+            </div>
+
+            <div class="ft-manufact" id="ft_manufact_Id">
+                {{!-- <div id="serachCondition" name="userachCondition"></div> --}}
+                {{!-- <input type="text" name="serachCondition" ,id="serachCond" value=""> --}}
+
+                
+                {{#each mf as |item i|}}
+                {{#ifMod i}}
+                <div class="col-mf_new" id="col-mf_new_Id_{{i_Mnf_Id}}">
+                    {{/ifMod}}
+
+                    <input class="checkboxInput" type="checkbox" value='{{i_Mnf_Id}}' name="chk_mnf"  id="chk_mnf{{i_Mnf_Id}}">
+                    <label class="lableMnf" for="{{i_Mnf_Id}}"> {{c_Mnf}}</label>
+
+                    {{#ifMod1 i}}
+                </div>
+                {{/ifMod1}}
+
+                {{/each}}
+
+                <div>
+                    <hr>
+                </div>
+
+            </div>
+            {{!-- Unstrung Start --}}
+
+            <div class="row-headsize">
+                <div class="rowMf-1">
+                    <input type="checkbox" class="checkboxInput" name="chk_i_HeadSize" id="chk_i_HeadSize"  value="Head Size Range"
+                        onclick="row_headszie_click(this,'row_headszie','txt_hsr_from','txt_hsr_to')"  >
+                    <label><b> Head Size Range(Sq.Inches)</b></label>
+                </div>
+                <div class="rowMf-2" id="row_headszie" style="display: none;">
+                    <label> From</label>
+                    <input type="text" name="txt_hsr_from" id="txt_hsr_from" >
+                    <label> To</label>
+                    <input type="text" name="txt_hsr_to" id="txt_hsr_to">
+
+                </div>
+                <div>
+                    <hr>
+                </div>
+            </div>
+            {{!-- Unstrung End --}}
+            {{!-- Price Start --}}
+            <div class="row-pricerange">
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_Price" id="chk_i_Price" class="checkboxInput" value=""
+                        onclick="row_headszie_click(this,'row_price','txt_price_from','txt_price_to')">
+                    <label><b> Price Range(Rs.)</b></label>
+                </div>
+                <div class="rowMf-2" id="row_price" style="display: none;">
+                    <label> From</label>
+                    <input type="text" name="txt_price_from" id="txt_price_from" >
+                    <label> To</label>
+                    <input type="text" name="txt_price_to" id="txt_price_to">
+
+                </div>
+                <div>
+                    <hr>
+                </div>
+            </div>
+
+            {{!-- Price End --}}
+            {{!-- Length Range Start --}}
+            <div class="row-lengthrange">
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_Length" id="chk_i_Length" value="lenght range" class="checkboxInput"
+                        onclick="row_headszie_click(this,'row_lenghtrange','txt_length_from','txt_length_to')">
+                    <label><b> Length Range(Inches)</b></label>
+                </div>
+                <div class="rowMf-2" id="row_lenghtrange" style="display: none;">
+                    <label> From</label>
+                    <input type="text" name="txt_length_from" id="txt_length_from">
+                    <label> To</label>
+                    <input type="text" name="txt_length_to" id="txt_length_to">
+
+                </div>
+                <div>
+                    <hr>
+                </div>
+            </div>
+            {{!-- Length Range End --}}
+            {{!-- Racket Condition Start --}}
+            <div class="row-racketcond">
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_condrating_Id"  id="chk_i_condrating_Id" value="" class="checkboxInput"
+                        onclick="row_headszie_click(this,'row_racketcond','txt_racketcond_from','txt_racketcond_to')">
+                    <label><b>Racket Condition Rating</b></label>
+                </div>
+                <div class="rowMf-2" id="row_racketcond" style="display: none;">
+                    <label> From</label>
+                    <input type="text" name="txt_racketcond_from" id="txt_racketcond_from">
+                    <label> To</label>
+                    <input type="text" name="txt_racketcond_to" id="txt_racketcond_to">
+
+                </div>
+                <div>
+                    <hr>
+                </div>
+            </div>
+            {{!-- Racket Condition End --}}
+            {{!-- Grip Size Range Start --}}
+            <div class="row-gripsize">
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_GripSize" id="chk_i_GripSize" class="checkboxInput"
+                        onclick="row_headszie_click(this,'row_gripsize','txt_racketGrip_from','txt_racketGrip_to')">
+                    <label><b> Grip Size Range</b></label>
+                </div>
+                <div class="rowMf-2" id="row_gripsize" style="display: none;">
+                    <label> From</label>
+                    <input type="text" name="txt_racketGrip_from" id="txt_racketGrip_from">
+                    <label> To</label>
+                    <input type="text" name="txt_racketGrip_to" id="txt_racketGrip_to">
+
+                </div>
+                <div>
+                    <hr>
+                </div>
+            </div>
+            {{!-- Grip Size Range End --}}
+            {{!-- Verification Status Start --}}
+            <div class="row-verficationstatus">
+                <div class="rowMf-1">
+                    {{!-- <input type="checkbox" name="verifystatus"> --}}
+                    <label><b> Verification Status</b></label>
+                </div>
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_Ver_Status_byUs" class="checkboxInput" id="row_verifybyus">
+                    <label><b> Verification by Us</b></label>
+                </div>
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_Ver_Status_notverify" id="chk_i_Ver_Status_notverify" class="checkboxInput">
+                    <label><b> Not Verification by Us</b></label>
+                </div>
+            </div>
+            {{!-- Grip Size Range End --}}
+        </form>
+        {{!-- <button onclick="search()">Do It</button> --}}
+</div>
+<script>
+    function row_headszie_click(checked, elemenid,inputfromid,inputtoid) {
+        {{!-- console.log(elemenid); --}}
+        let element=document.getElementById(elemenid);
+        if (element.style.display == "none" && sessionStorage.getItem('hsize')!=null) {
+            console.log('within if');
+            element.style.display = "block";
+            
+            document.getElementById(inputfromid).value="";
+            document.getElementById(inputtoid).value="";
+        }
+        else if (element.style.display == "none" && sessionStorage.getItem('hsize')==null) {
+            element.style.display = "block";
+            document.getElementById(inputfromid).value="";
+            document.getElementById(inputtoid).value="";
+        } else {
+            console.log('within else');
+            element.style.display = "none";
+             document.getElementById(inputfromid).value=0;
+            document.getElementById(inputtoid).value=1000000;
+            console.log('unchecked' + document.getElementById(inputtoid).value);
+        }
+
+
+    
+    }
+
+</script>
+<script>
+        fliterArray=[];
+
+        function LoadSelectedFliterCondition(){
+            let lastArrChild=[];
+            //mnf
+            if (sessionStorage.getItem('mnf')!=null){
+                let eachArray=[];
+                session_Storage_parse=JSON.parse( sessionStorage.getItem('mnf'));
+                for (i=0;i<session_Storage_parse.length;i++){
+                    eachArray=session_Storage_parse[i];
+                    icount=i+1;
+                    document.getElementById('chk_mnf'+icount).checked=eachArray[1];
+                }
+            }
+
+            //--------Head size--------------
+            if (sessionStorage.getItem('hsize')!=null){
+                session_Storage_parse=JSON.parse( sessionStorage.getItem('hsize'));
+
+                 lastArrChild=session_Storage_parse[session_Storage_parse.length-1];
+                if (lastArrChild[1]==true){
+                    document.getElementById('row_headszie').style.display = "block";
+                    document.getElementById('chk_i_HeadSize').checked=lastArrChild[1];
+                    document.getElementById('txt_hsr_from').value=lastArrChild[2];
+                    document.getElementById('txt_hsr_to').value=lastArrChild[3];
+                }else{
+                    document.getElementById('row_headszie').style.display = "none";
+                }
+                
+                
+            }
+            //----------Price---------------------
+            //session_Storage_parse=[];
+            //lastArrChild=[];
+            if (sessionStorage.getItem('prce')!=null){
+              
+                session_Storage_parse=JSON.parse( sessionStorage.getItem('prce'));
+                console.log(session_Storage_parse);
+                 lastArrChild=session_Storage_parse[session_Storage_parse.length-1];
+                   console.log(lastArrChild);
+                if (lastArrChild[1]==true){
+                    document.getElementById('row_price').style.display = "block";
+                    document.getElementById('chk_i_Price').checked=lastArrChild[1];
+                    document.getElementById('txt_price_from').value=lastArrChild[2];
+                    document.getElementById('txt_price_to').value=lastArrChild[3];
+                }else{
+                    document.getElementById('row_price').style.display = "none";
+                }
+            }
+
+            //------Length----------------
+            session_Storage_parse=[];
+            lastArrChild=[];
+            if (sessionStorage.getItem('lng')!=null){
+
+                session_Storage_parse=JSON.parse( sessionStorage.getItem('lng'));
+
+                 lastArrChild=session_Storage_parse[session_Storage_parse.length-1];
+                if (lastArrChild[1]==true){
+                    document.getElementById('row_lenghtrange').style.display = "block";
+                    document.getElementById('chk_i_Length').checked=lastArrChild[1];
+                    document.getElementById('txt_length_from').value=lastArrChild[2];
+                    document.getElementById('txt_length_to').value=lastArrChild[3];
+                }else{
+                    document.getElementById('row_lenghtrange').style.display = "none";
+                }
+            }
+            //---------Condition Rating
+            session_Storage_parse=[];
+            lastArrChild=[];
+            if (sessionStorage.getItem('cndrat')!=null){
+
+                session_Storage_parse=JSON.parse( sessionStorage.getItem('cndrat'));
+
+                 lastArrChild=session_Storage_parse[session_Storage_parse.length-1];
+                if (lastArrChild[1]==true){
+                    document.getElementById('row_racketcond').style.display = "block";
+                    document.getElementById('chk_i_condrating_Id').checked=lastArrChild[1];
+                    document.getElementById('txt_racketcond_from').value=lastArrChild[2];
+                    document.getElementById('txt_racketcond_to').value=lastArrChild[3];
+                }else{
+                    document.getElementById('row_racketcond').style.display = "none";
+                }
+            }
+            //------Grip Size
+            session_Storage_parse=[];
+            lastArrChild=[];
+            if (sessionStorage.getItem('grsize')!=null){
+
+                session_Storage_parse=JSON.parse( sessionStorage.getItem('grsize'));
+
+                 lastArrChild=session_Storage_parse[session_Storage_parse.length-1];
+                if (lastArrChild[1]==true){
+                    document.getElementById('row_gripsize').style.display = "block";
+                    document.getElementById('chk_i_GripSize').checked=lastArrChild[1];
+                    document.getElementById('txt_racketGrip_from').value=lastArrChild[2];
+                    document.getElementById('txt_racketGrip_to').value=lastArrChild[3];
+                }else{
+                    document.getElementById('row_gripsize').style.display = "none";
+                }
+            }
+            //verify by us
+            session_Storage_parse=[];
+            lastArrChild=[];
+            if (sessionStorage.getItem('vrbyus')!=null){
+
+                session_Storage_parse=JSON.parse( sessionStorage.getItem('vrbyus'));
+
+                 lastArrChild=session_Storage_parse[session_Storage_parse.length-1];
+                if (lastArrChild[1]==true){
+                    console.log('verify' + lastArrChild[1])
+                    document.getElementById('row_verifybyus').checked=lastArrChild[1];
+                   
+                }
+            }
+            //------Not verify by us
+            session_Storage_parse=[];
+            lastArrChild=[];
+            if (sessionStorage.getItem('ntvrbyus')!=null){
+
+                session_Storage_parse=JSON.parse( sessionStorage.getItem('ntvrbyus'));
+
+                 lastArrChild=session_Storage_parse[session_Storage_parse.length-1];
+                if (lastArrChild[1]==true){
+                
+                    document.getElementById('chk_i_Ver_Status_notverify').checked=lastArrChild[1];
+                   
+                }
+            }
+        };
+        
+        function onChange(){
+            //save fliter to session
+            fliterArray=[];
+            fliterArray.push(['mnf',document.getElementById('chk_mnf1').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf2').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf3').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf4').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf5').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf6').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf7').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf8').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf9').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf10').checked]);
+            sessionStorage.setItem('mnf' , JSON.stringify( fliterArray));
+
+
+
+            //head size
+            fliterArray=[];
+            fliterArray.push(['hsize',document.getElementById('chk_i_HeadSize').checked,document.getElementById('txt_hsr_from').value,document.getElementById('txt_hsr_to').value]);
+            sessionStorage.setItem('hsize' , JSON.stringify( fliterArray));
+            
+            //Price
+            fliterArray=[];
+            sessionStorageStrg="";
+            if (sessionStorage.getItem('prce')!=null){
+                
+                //sessionStorageStrg=sessionStorage.getItem('prce');
+                //fliterArray=JSON.parse(sessionStorageStrg);
+            }
+            fliterArray.push(['prce',document.getElementById('chk_i_Price').checked,document.getElementById('txt_price_from').value,document.getElementById('txt_price_to').value]);
+            sessionStorage.setItem('prce' , JSON.stringify( fliterArray));
+            
+
+            //---------Length
+            fliterArray=[];
+            sessionStorageStrg="";
+            if (sessionStorage.getItem('lng')!=null){
+                
+                //sessionStorageStrg=sessionStorage.getItem('lng');
+                //fliterArray=JSON.parse(sessionStorageStrg);
+            }
+            fliterArray.push(['lng',document.getElementById('chk_i_Length').checked,document.getElementById('txt_length_from').value,
+                document.getElementById('txt_length_from').value]);
+            sessionStorage.setItem('lng' , JSON.stringify( fliterArray));
+            
+            //-----------Conditional Rating
+            fliterArray=[];
+            sessionStorageStrg="";
+            if (sessionStorage.getItem('cndrat')!=null){
+                
+                //sessionStorageStrg=sessionStorage.getItem('lng');
+                //fliterArray=JSON.parse(sessionStorageStrg);
+            }
+            fliterArray.push(['cndrat',document.getElementById('chk_i_condrating_Id').checked,document.getElementById('txt_racketcond_from').value,
+                document.getElementById('txt_racketcond_to').value]);
+            sessionStorage.setItem('cndrat' , JSON.stringify( fliterArray));
+
+            //GripSize
+             fliterArray=[];
+            sessionStorageStrg="";
+            if (sessionStorage.getItem('grsize')!=null){
+                
+                //sessionStorageStrg=sessionStorage.getItem('lng');
+                //fliterArray=JSON.parse(sessionStorageStrg);
+            }
+            fliterArray.push(['grsize',document.getElementById('chk_i_GripSize').checked,document.getElementById('txt_racketGrip_from').value,
+                document.getElementById('txt_racketGrip_to').value]);
+            sessionStorage.setItem('grsize' , JSON.stringify( fliterArray));
+
+            //verify by us
+             fliterArray=[];
+            sessionStorageStrg="";
+            if (sessionStorage.getItem('vrbyus')!=null){
+                
+                //sessionStorageStrg=sessionStorage.getItem('lng');
+                //fliterArray=JSON.parse(sessionStorageStrg);
+            }
+            fliterArray.push(['vrbyus',document.getElementById('row_verifybyus').checked]);
+            sessionStorage.setItem('vrbyus' , JSON.stringify( fliterArray));
+
+           //not verify by us
+             fliterArray=[];
+            sessionStorageStrg="";
+            if (sessionStorage.getItem('ntvrbyus')!=null){
+                
+                //sessionStorageStrg=sessionStorage.getItem('lng');
+                //fliterArray=JSON.parse(sessionStorageStrg);
+            }
+            fliterArray.push(['ntvrbyus',document.getElementById('chk_i_Ver_Status_notverify').checked]);
+            sessionStorage.setItem('ntvrbyus' , JSON.stringify( fliterArray));
+
+
+    }
+
+    window.onload=(event)=>{
+        LoadSelectedFliterCondition();
+    }
+    
+
+</script>
+<script>
+    function Removefilter(){
+                    fliterArray=[];
+                    document.getElementById('chk_mnf1').checked=false;
+                    document.getElementById('chk_mnf2').checked=false;
+                    document.getElementById('chk_mnf3').checked=false;
+                    document.getElementById('chk_mnf4').checked=false;
+                    document.getElementById('chk_mnf5').checked=false;
+                    document.getElementById('chk_mnf6').checked=false;
+                    document.getElementById('chk_mnf7').checked=false;
+                    document.getElementById('chk_mnf8').checked=false;
+                    document.getElementById('chk_mnf9').checked=false;
+                    document.getElementById('chk_mnf10').checked=false;
+                    console.log("Manufacturer " + document.getElementById('chk_mnf2').checked)
+            fliterArray.push(['mnf',document.getElementById('chk_mnf1').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf2').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf3').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf4').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf5').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf6').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf7').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf8').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf9').checked]);
+            fliterArray.push(['mnf',document.getElementById('chk_mnf10').checked]);
+            sessionStorage.setItem('mnf' , JSON.stringify( fliterArray));
+
+
+
+            //head size
+            fliterArray=[];
+            document.getElementById('chk_i_HeadSize').checked=false;
+            document.getElementById('txt_hsr_from').value="";
+            document.getElementById('txt_hsr_to').value="";
+            fliterArray.push(['hsize',document.getElementById('chk_i_HeadSize').checked,document.getElementById('txt_hsr_from').value,document.getElementById('txt_hsr_to').value]);
+            sessionStorage.setItem('hsize' , JSON.stringify( fliterArray));
+            
+            //Price
+            fliterArray=[];
+            sessionStorageStrg="";
+            
+            document.getElementById('chk_i_Price').checked=false;
+            document.getElementById('txt_price_from').value="";
+            document.getElementById('txt_price_to').value="";
+            fliterArray.push(['prce',document.getElementById('chk_i_Price').checked,document.getElementById('txt_price_from').value,document.getElementById('txt_price_to').value]);
+            sessionStorage.setItem('prce' , JSON.stringify( fliterArray));
+            
+
+            //---------Length
+            fliterArray=[];
+            sessionStorageStrg="";
+            ument.getElementById('chk_i_Length').checked=false;
+            document.getElementById('txt_length_from').value="";
+                document.getElementById('txt_length_from').value="";
+            fliterArray.push(['lng',document.getElementById('chk_i_Length').checked,document.getElementById('txt_length_from').value,
+                document.getElementById('txt_length_from').value]);
+            sessionStorage.setItem('lng' , JSON.stringify( fliterArray));
+            
+            //-----------Conditional Rating
+            fliterArray=[];
+            sessionStorageStrg="";
+            document.getElementById('chk_i_condrating_Id').checked=false; 
+            document.getElementById('txt_racketcond_from').value="";
+            document.getElementById('txt_racketcond_to').value="";
+            fliterArray.push(['cndrat',document.getElementById('chk_i_condrating_Id').checked,document.getElementById('txt_racketcond_from').value,
+                document.getElementById('txt_racketcond_to').value]);
+            sessionStorage.setItem('cndrat' , JSON.stringify( fliterArray));
+
+            //GripSize
+             fliterArray=[];
+            sessionStorageStrg="";
+            document.getElementById('chk_i_GripSize').checked=false;
+             document.getElementById('txt_racketGrip_from').value="";
+                document.getElementById('txt_racketGrip_to').value="";
+            fliterArray.push(['grsize',document.getElementById('chk_i_GripSize').checked,document.getElementById('txt_racketGrip_from').value,
+                document.getElementById('txt_racketGrip_to').value]);
+            sessionStorage.setItem('grsize' , JSON.stringify( fliterArray));
+
+            //verify by us
+             fliterArray=[];
+            sessionStorageStrg="";
+            document.getElementById('row_verifybyus').checked=false;
+            fliterArray.push(['vrbyus',document.getElementById('row_verifybyus').checked]);
+            sessionStorage.setItem('vrbyus' , JSON.stringify( fliterArray));
+
+           //not verify by us
+             fliterArray=[];
+            sessionStorageStrg="";
+            document.getElementById('chk_i_Ver_Status_notverify').checked=false;
+            fliterArray.push(['ntvrbyus',document.getElementById('chk_i_Ver_Status_notverify').checked]);
+            sessionStorage.setItem('ntvrbyus' , JSON.stringify( fliterArray));
+
+    }
+</script>    
+
+
+
+
+

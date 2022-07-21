@@ -1,0 +1,3 @@
+// const WhatsappMessage=mongoose.model("WhatsappMessage",client);
+
+module.exports=client;

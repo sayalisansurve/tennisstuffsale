@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP</title>
+</head>
+<body>
+     {{>navbar}}
+    <div class="form-container">
+                     
+       <form action="/upload" method="post" onsubmit="return validateForm()" enctype="multipart/form-data"
+                name="form">
+      <label for="otp">OTP</label>
+      <input type="number" placeholder="Enter OTP send to Your Email.">
+       <button type="submit" class="btnSave" id="btnsubmit">Continue</button>  
+      </form>
+    </div>
+    {{>footers}}
+</body>
+</html>

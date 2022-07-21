@@ -1,0 +1,50 @@
+code
+Dim http As Object
+  Set http = CreateObject("WinHttp.WinHttprequest.5.1")
+  URL = "http://www.yoursite.com/yourpage.html"
+  http.Open "Get", URL, False
+  http.send   
+  MsgBox http.responseText
+
+
+if they want the token\api key in the request header you may need to do this before the .send
+.setRequestHeader "charset", "UTF-8"
+.setRequestHeader "apikey\token", "yourkeyortokenid"
+
+
+
+
+
+
+There are usually three topic areas to deal with:
+
+HTTP/HTTPS
+Authentication
+Payload
+
+
+For the first I would look at WinHttp. That library has been part of Windows for a very long time now and it exposes a type library for its ActiveX API making it easy to use in VB6.
+
+The second can be handled by WinHttp as well except that you suggest you are not using HTTP Authentication. In such cases you may need to make use of cryptography libraries to deal with HMACs or other schemes. Sometimes you can get by with the VB-friendly CAPICOM library but that no longer ships in Windows (Windows 8 and later?) and must be downloaded and installed. There is also a lot of wrapper code in the VB6 CodeBank forum here to make use of both the old Crypto API and the newer Crypto Next Gen API (bcrypt.dll).
+
+Payloads usually involve things like XML, JSON, etc. and often URL encoding/decoding schemes. MSXML is viable for the first, there are several VB6 JSON parser/generators in the CodeBank and elsewhere. There are also some samples there showing how to deal with things like application/x-www-form-urlencoded and other HTTP-related payload formatting.
+
+
+Since you said RESTFul, we don't need to go into the problem of SOAP payloads. These are not extinct yet but we can always hope.
+Last edi
+
+
+
+///code project
+Private Async Sub PostMessageTest_Click(sender As Object, e As EventArgs) Handles PostMessageTest.Click
+   Dim c As New CustomersRest
+   c.FirstName = "Bill"
+   c.LastName = "Gates"
+   c.CustomerID = Guid.Empty
+   Dim RestURL As String = "https://example.com/api/customers/"
+   Dim client As New Http.HttpClient
+   Dim JsonData As String = JsonConvert.SerializeObject(c)
+   Dim RestContent As New Http.StringContent(JsonData, Encoding.UTF8, "application/json")
+   Dim RestResponse As Http.HttpResponseMessage = Await client.PostAsync(RestURL, RestContent)
+   ResultMessage.Text = RestResponse.StatusCode.ToString
+End Sub

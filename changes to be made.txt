@@ -1,0 +1,56 @@
+1 upload description font show little large
+	description text are below border
+2 upload images small images on sandeep computer
+
+3 edit button delete not working on sandeep computer
+
+4 after uplaod show message on same page and if user refresh it again save racket
+
+5 contact page fine tune
+
+6 zoom image problem on sandeep computer
+
+7 folder name maxid + username
+
+8 upload and edit image add label
+
+9 condition dark blue color no red color Done
+
+10 search button curson pointer done
+
+11 verification shift down little done
+
+12 after search condition argument not pass
+
+13 product underline increase done
+
+14 racket model in database add blank --- model done
+
+15 upload and edit on main image next previous button add
+
+16 upload and edit space head size and (inches) and unstrung
+
+17 head size sq.inch change
+
+17 grip size show details
+
+18 upload and edit product name and description fontsize reduce by 1
+
+19 align add to cart plus qty and minus and top adjust from lenght
+
+20 delete images logic
+
+21 upload Change text Edit products recods to Edit/Delete Products Records
+
+22 upload manufacturer and series not coming 
+	Manufacturer + + name
+
+23 remove all criteria
+
+24 change search text to apply fliter and add buttong remove fliter
+25 button squre and reduce height
+
+cart 
+price not coming 
+buy buttong top 
+add and remove on add to cart

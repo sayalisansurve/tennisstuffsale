@@ -1,0 +1,170 @@
+{{!--
+<link rel="stylesheet" href="/css/style.css"> --}}
+<!-- -------------------Featured Proucts--------------------------------------- -->
+{{!-- --------------------First Row----------------------------------------------------- --}}
+{{!-- <div class="productcontainer"> --}}
+    <div class="small-container">
+        <h2 class="title"> Products</h2>
+
+        <div class="row">
+            {{!-- {{#each list[]}} --}}
+            {{!-- {{list}} --}}
+            {{!-- {{#each images as |item i|}} --}}
+           
+            {{#each images as |item i|}}
+            {{!-- <div id="folder">{{c_Mnf}}</div> --}}
+            {{!-- {{#each this}} --}}
+              
+            {{#if c_FolderName }}
+            {{!-- bootstrap cads --}}
+             {{!-- <div>{{this}}</div>  --}}
+            {{#ifcond i}}
+            {{!-- <div>Count {{i}}</div> --}}
+            <a href="/productdetails/{{_id}}"><div class="col-4">
+                <div class="productImage">
+                    <a href="/productdetails/{{_id}}"> <img src='{{c_FolderName}}/{{c_mainImageName}}'
+                            class="productImage"></a>
+                </div>
+                {{!-- "images/product-1.jfif" --}}
+                <div class="productdetails">
+                    <a id="product_name" href="/productdetails/{{_id}}">
+                        <h4 id="desc-1"><b>{{c_Rkt_Name}}</b></h4>
+                    </a>
+                    <div style="height:120px;margin-right:10px">
+                        <p>Manufacturer: {{c_Mnf}}</p>
+                        <p>Series: {{c_series}}</p>
+                        <p>Head Size: {{i_HeadSize}}</p>
+                        <p>UnStrung Wt : {{i_Weight_Un_St}}</p>
+                        <p>Length : {{i_Length}}</p>
+                        {{#iifequalBool i_GripSize 0 }}                    
+                            <p>Grip Size : L0=4 Inches</p>
+                        {{else }} {{#iifequalBool i_GripSize 1 }}                    
+                            <p>Grip Size : L1 = 4 1/8 Inches</p>
+                        
+                        {{else}} {{#iifequalBool i_GripSize 1 }}                    
+                            <p>Grip Size : L1 = 4 1/8 Inches</p>
+                        {{else}} {{#iifequalBool i_GripSize 3 }}                    
+                            <p>Grip Size :L3 = 4 3/8 Inches</p>
+                        {{else}} {{#iifequalBool i_GripSize 4 }}                    
+                            <p>Grip Size : L4 = 4 1/4 Inches</p>
+                        {{else}} {{#iifequalBool i_GripSize 5 }}                    
+                            <p>Grip Size : L5 = 4 5/8 Inches</p>
+                        {{else}} {{#iifequalBool i_GripSize 5 }}                    
+                            <p>Grip Size : L5 = 4 5/8 Inches</p>
+                        {{else}} {{#iifequalBool i_GripSize 7 }}                    
+                            <p>Grip Size : Unknown</p>
+                        
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}          
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}                    
+                                  
+                        
+                        </div>
+                        <div class="rating">
+                            {{!-- <img src={{ifCondRating i_condrating_Id }} id="condrating"> --}}
+                            <div id="condrating" style="color: #1E8FD5;" >Condition : {{i_Cond_Rating}}/10</div>
+                            {{!-- <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span> --}}
+
+                        </div>
+                        <div>
+                            <p id="price-1"><b> Price {{i_Price}}</b></p>
+                        </div>
+                
+                    {{!-- <span class="small-size">M.R.P{{mrp}}</span> --}}
+                </div></a>
+            </div>
+
+            {{/ifcond}}
+            {{!-- second row --}}
+            {{#ifcondgt5le10 i}}
+            <div class="col-4">
+                <div class="productImage">
+                    <a href="/productdetails/{{_id}}"> <img src='{{c_FolderName}}/{{c_mainImageName}}'
+                            class="productImage"></a>
+                </div>
+                
+                {{!-- "images/product-1.jfif" --}}
+                <div class="productdetails">
+                
+                <a href="/productdetails/{{_id}}">
+                    <h4 id="desc-1">{{c_Rkt_Name}}</h4>
+                </a>
+                <div style="height:120px;margin-right:10px">
+                        <p>Manufacturer: {{c_Mnf}}</p>
+                        <p>Series: {{c_series}}</p>
+                        <p>Head Size: {{i_HeadSize}}</p>
+                        <p>UnStrung Wt : {{i_Weight_Un_St}}</p>
+                        <p>Length : {{i_Length}}</p>
+                        {{#iifequalBool i_GripSize 0 }}                    
+                            <p>Grip Size : L0=4 Inches</p>
+                        {{else }} {{#iifequalBool i_GripSize 1 }}                    
+                            <p>Grip Size : L1 = 4 1/8 Inches</p>
+                        
+                        {{else}} {{#iifequalBool i_GripSize 1 }}                    
+                            <p>Grip Size : L1 = 4 1/8 Inches</p>
+                        {{else}} {{#iifequalBool i_GripSize 3 }}                    
+                            <p>Grip Size :L3 = 4 3/8 Inches</p>
+                        {{else}} {{#iifequalBool i_GripSize 4 }}                    
+                            <p>Grip Size : L4 = 4 1/4 Inches</p>
+                        {{else}} {{#iifequalBool i_GripSize 5 }}                    
+                            <p>Grip Size : L5 = 4 5/8 Inches</p>
+                        {{else}} {{#iifequalBool i_GripSize 5 }}                    
+                            <p>Grip Size : L5 = 4 5/8 Inches</p>
+                        {{else}} {{#iifequalBool i_GripSize 7 }}                    
+                            <p>Grip Size : Unknown</p>
+                        
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}          
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}                    
+                        {{/iifequalBool}}                    
+                                  
+                        
+                        </div>
+                        <div class="rating">
+                            {{!-- <img src={{ifCondRating i_condrating_Id }} id="condrating"> --}}
+                            <div id="condrating" style="color: #1E8FD5;" >Condition : {{i_Cond_Rating}}/10</div>
+                            {{!-- <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span> --}}
+
+                        </div>
+                        <div>
+                            <p id="price-1"><b> Price {{i_Price}}</b></p>
+                        </div>
+                </div>    
+                {{!-- <span class="small-size">M.R.P{{mrp}}</span> --}}
+            </div>
+
+            {{/ifcondgt5le10}}
+
+            {{!-- second row end --}}
+            {{!-- /bootstrap cads --}}
+            {{/if}}
+            {{!-- {{/each}} --}}
+            {{/each}}
+
+
+
+
+
+
+            {{!-- ----------------------First Row End----------------------------------------------------- --}}
+        </div>
+    </div>
+    {{!--
+</div> --}}

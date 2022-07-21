@@ -1,0 +1,56 @@
+<div class="productcontainer">
+    <div class="small-container">
+        <h2 class="title"> Featured Products</h2>
+        {{!-- display images --}}
+        <section class="mt-5">
+            <div class="row">
+            {{!-- {{col}}1 --}}
+            {{#each images as |item i|}}
+            {{#each this}}
+            {{#if pimage1 }}
+            {{!-- bootstrap cads --}}
+            {{#ifcond i}}
+                
+                    <div class="col-3">
+                        {{!-- {{col}} --}}
+                        <div class="card shadow" style="width: 18rem;">
+                            <img src='images/{{pimage1}}' class="card-img-top" class="img-fluid" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title font-poppins">{{name}} index is {{i}} </h5>
+                                <p class="text-secondary font-size-09">{{pheader}}</p>
+                                <p class="text-secondary font-size-09">Rs.{{price}} <small>MRP Rs.{{mrp}}</small> </p>
+
+                                {{!-- <a href="#" class="btn btn-info font-size-09 text-light">Read More...</a> --}}
+                            </div>
+                        </div>
+                    </div>
+            {{else}}
+                <div class="row-3">
+                {{!-- <p>Hello</p> --}}
+
+                <div class="col-3">
+                        {{!-- {{col}} --}}
+                        <div class="card shadow" >
+                            <img src='images/{{pimage1}}' class="card-img-top" class="img-fluid" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title font-poppins">{{name}} index is {{i}} </h5>
+                                <p class="text-secondary font-size-09">{{pheader}}</p>
+                                <p class="text-secondary font-size-09">Rs.{{price}} <small>MRP Rs.{{mrp}}</small> </p>
+
+                                {{!-- <a href="#" class="btn btn-info font-size-09 text-light">Read More...</a> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/ifcond}}
+            
+            {{!-- /bootstrap cads --}}
+            {{/if}}
+            {{/each}}
+            {{/each}}
+            </div>
+        </section>
+        {{!-- /display images --}}
+    </div>
+
+</div>

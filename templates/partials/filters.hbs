@@ -1,0 +1,197 @@
+<div class="col_2">
+    <img src="images/logo.png" height="5%" width="25%">
+    <div class="heading1">
+        <h1>Fulfill Your Passion! </h1>
+    </div>
+</div>
+
+<div class="ft-maincontainer">
+    <div>
+        <a href="" class="btn-search">Search</a>
+    </div>
+
+    <div class="ft-container">
+            <div class="ft-manufact">
+                {{!-- Manuf Start --}}
+                <form action="/search" method="post" role="form" enctype="multipart/form-data" name="form">
+
+                <label for=""><b> Manufacturer</b></label>
+
+                {{#each mf as |item i|}}
+                {{!-- bootstrap cads --}}
+
+                {{#ifMod i}}
+                <div class="col-mf">
+                    {{/ifMod}}
+
+                    <input type="checkbox" value="{{i_Mnf_Id}}" name="chk_mnf_{{i_Mnf_Id}}             ">
+                    <label for="{{i_Mnf_Id}}"> {{c_Mnf}}</label>
+
+                    {{#ifMod1 i}}
+                </div>
+                {{/ifMod1}}
+
+          
+
+
+                {{/each}}
+          </form>
+
+
+                <div>
+                    <hr>
+                </div>
+            </div>
+            {{!-- Manuf End --}}
+            {{!-- Head Size Start --}}
+            <div class="row-headsize">
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_HeadSize" value="Head Size Range"
+                        onclick="row_headszie_click(this,'row_headszie')">
+                    <label><b> Head Size Range(Sq.Inches)</b></label>
+                </div>
+                <div class="rowMf-2" id="row_headszie" hidden=true>
+                    <label> From</label>
+                    <input type="text" name="txt_hsr_from">
+                    <label> To</label>
+                    <input type="text" name="txt_hsr_to">
+
+                </div>
+                <div>
+                    <hr>
+                </div>
+            </div>
+
+            {{!-- Head Size End --}}
+            {{!-- Unstrung Start --}}
+            <div class="row-unstrungwt">
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_Weight_Un_St" value="Unstrung Weight Range"
+                        onclick="row_headszie_click(this,'row-unstrung')">
+                    <label><b> Unstrung Weight Range(Grams)</b></label>
+                </div>
+                <div class="rowMf-2" id="row-unstrung" hidden=true>
+                    <label> From</label>
+                    <input type="text" name="txt_unstr_from">
+                    <label> To</label>
+                    <input type="text" name="txt_unstr_to">
+
+                </div>
+                <div>
+                    <hr>
+                </div>
+            </div>
+            {{!-- Unstrung End --}}
+            {{!-- Price Start --}}
+            <div class="row-pricerange">
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_Price" value=""
+                        onclick="row_headszie_click(this,'row_price')">
+                    <label><b> Price Range(Rs.)</b></label>
+                </div>
+                <div class="rowMf-2" id="row_price" hidden=true>
+                    <label> From</label>
+                    <input type="text" name="txt_price_from">
+                    <label> To</label>
+                    <input type="text" name="txt_price_to">
+
+                </div>
+                <div>
+                    <hr>
+                </div>
+            </div>
+            {{!-- Price End --}}
+            {{!-- Length Range Start --}}
+            <div class="row-lengthrange">
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_Length" value="lenght range"
+                        onclick="row_headszie_click(this,'row_lengthrange')">
+                    <label><b> Length Range(Inches)</b></label>
+                </div>
+                <div class="rowMf-2" id="row_lenghtrange" hidden=true>
+                    <label> From</label>
+                    <input type="text" name="txt_length_from">
+                    <label> To</label>
+                    <input type="text" name="txt_length_to">
+
+                </div>
+                <div>
+                    <hr>
+                </div>
+            </div>
+            {{!-- Length Range End --}}
+            {{!-- Racket Condition Start --}}
+            <div class="row-racketcond">
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_condrating_Id" value=""
+                        onclick="row_headszie_click(this,'row_racketcond')">
+                    <label><b>Racket Condition Rating</b></label>
+                </div>
+                <div class="rowMf-2" id="row_racketcond" hidden=true>
+                    <label> From</label>
+                    <input type="text" name="txt_racketcond_from">
+                    <label> To</label>
+                    <input type="text" name="txt_racketcond_to">
+
+                </div>
+                <div>
+                    <hr>
+                </div>
+            </div>
+            {{!-- Racket Condition End --}}
+            {{!-- Grip Size Range Start --}}
+            <div class="row-gripsize">
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_GripSize" onclick="row_headszie_click(this,'row_gripsize')">
+                    <label><b> Grip Size Range</b></label>
+                </div>
+                <div class="rowMf-2" id="row_gripsize" hidden=true>
+                    <label> From</label>
+                    <input type="text" name="txt_racketGrip_from">
+                    <label> To</label>
+                    <input type="text" name="txt_racketGrip_to">
+
+                </div>
+                <div>
+                    <hr>
+                </div>
+            </div>
+            {{!-- Grip Size Range End --}}
+            {{!-- Verification Status Start --}}
+            <div class="row-verficationstatus">
+                <div class="rowMf-1">
+                    {{!-- <input type="checkbox" name="verifystatus"> --}}
+                    <label><b> Verification Status</b></label>
+                </div>
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_Ver_Status_byUs" id="row_verifybyus">
+                    <label><b> Verification by Us</b></label>
+                </div>
+                <div class="rowMf-1">
+                    <input type="checkbox" name="chk_i_Ver_Status_notverify">
+                    <label><b> Not Verification by Us</b></label>
+                </div>
+            </div>
+            {{!-- Grip Size Range End --}}
+    </div>
+</div>
+    {{!-- </form> --}}
+
+{{!-- <p>Money will no more hurdle <br> Sucees is Yours --}}
+    {{!-- </p> --}}
+
+
+<script>
+    function row_headszie_click(checked, elemenid) {
+        { { !--console.log(elemenid); --} }
+        if (checked.checked == true) {
+            document.getElementById(elemenid).hidden = false;
+        } else {
+            document.getElementById(elemenid).hidden = true;
+        }
+
+        console.log(checked.checked);
+
+
+    }
+</script>

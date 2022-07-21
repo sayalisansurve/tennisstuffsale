@@ -1,0 +1,121 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="header">
+    {{!-- <div class="containerNav"> --}}
+        <div class="navbarcustom">
+            <div class="logo">
+                {{!-- <a href="/"><img id="logo" src="/images/logo4.png" ></a> --}}
+                <a href="/"><img src="/images/logo.png" height="50px" width="50px"></a>
+            </div>
+            <nav>
+                <ul id="menuItems">
+                    <li><a href="/">Products</a> </li>
+                    {{!-- <li><a href="">About us</a> </li> --}}
+                    <li><a href="/contactus">Contact us</a> </li>
+                    {{!-- <li><a href="/SignIn">Account</a> </li> --}}
+                    {{#if user.isSelling}}
+                        <li id ='upload'><a href="/upload">Upload File</a> </li>
+                    {{/if}}
+                    {{!-- :'/signup'?'active':'' --}}
+                     {{!-- class="nav-item {{Path}}" --}}
+                    <li id="login"  style="display: block;"><a href="/login" id="logIn_hrf">LogIn</a> 
+                    
+                    </li>
+                        <li id="logout" style="display: none;"><a href="/logout" id="logOut_hrf"  >LogOut</a> </li>
+
+                    <li>
+                        <div id="user1" name="userName" >{{username}} 
+                        </div>
+                        
+                        <div id="userId" name="userId" hidden >{{user._id}} </div>
+                        <div id="isSelling" name="isSelling" hidden>{{user.isSelling}}</div>
+                        </li>
+                   
+                    {{!-- <li  id="logout"hidden  ><a href="/logout"> Logout</a> </li> --}}
+
+                    {{!-- <li><a href="account.html">Account</a> </li> --}}
+                </ul>
+
+            </nav>
+                    
+           
+            
+                <a href="/cart"  ><img  id="imgCart"  src="/images/shopping-cart.png" ></a>
+                <h1 class="fa fa-shopping-cart" id="cartcount" data-count={{cartItemCount}}></h1>
+            <h1 id="cartarray" hidden>Sayali</h1>
+            <form action="/login" method="post" >
+                {{!-- <div id="user1" name="user">{{user}}</div> --}}
+            </form>
+            {{!-- <div>Logged in as {{user}}</div> --}}
+            {{!-- <div id="user1" name="userid"  >{{userid}}</div> --}}
+            {{!-- <object name="user" id="user" data=""></object> --}}
+            <img src="/images/menu.png" class="menu-icon" onclick="menutoggle()">
+
+            {{#if verified }}
+                {{!-- <div>verified</div> --}}
+            {{else}}
+                {{!-- <div>not verified</div> --}}
+                <div><a href="/user/send-verification-email">Re-send verification email</a> </div>
+            {{/if}}
+            {{#if emailSend }}
+                <div>Verification Email send successfully</div>
+            {{else if Error}}
+                <div>Error : {{Error}}</div>
+            {{/if}}
+            
+            
+        </div>
+    {{!-- </div> --}}
+</div>
+<script>
+    var MenuItems=document.getElementById("menuItems");
+    // MenuItems.style.maxHeight="0px";
+    MenuItems.style.maxHeight="0px";
+    // MenuItems.maxHeight-"0px"
+    function menutoggle(){
+        // console.log(MenuItems.style.maxHeight);
+         if(MenuItems.style.maxHeight=="0px"){
+            MenuItems.style.maxHeight="200px";
+         }else{
+            MenuItems.style.maxHeight="0px";
+         }
+    }
+</script>
+<script>
+    let user1=document.getElementById('user1');    
+    let loginNav=document.getElementById('login');
+    let logoutNav=document.getElementById('logout');
+    //let logIn_hrf=document.getElementById('logIn_hrf');
+    let imgCart=document.getElementById('imgCart');
+    let upload=document.getElementById('upload');
+    var textuser=user1.innerText;
+    
+    if (textuser=="" ||textuser==undefined||textuser==null){
+        console.log("user name not exist "+ textuser);
+        //user1.hidden=true;
+        console.log('blank');
+        loginNav.style="display:inline-block";
+        logoutNav.style="display:none";
+        imgCart.hidden=true;
+        
+    }else{
+        console.log("user name "+ textuser);
+        //logIn_hrf.href="/logout"
+        //user1.hidden=false;
+        loginNav.style="display:none";
+        logoutNav.style="display:inline-block";
+        imgCart.hidden=false;
+        //localStorage.setItem('udefine',document.getElementById('userId').innerText)
+        
+        
+    }
+    
+    
+</script>
+<script>
+    let cartcount1=document.getElementById('cartcount')
+       {{!-- console.log('inside if navbar script' +cartcount1.getAttribute('data-count')) --}}
+        if (cartcount1.getAttribute('data-count')>0){
+         
+        cartcount1.classList.add('zero');
+    }
+</script>

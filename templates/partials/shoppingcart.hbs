@@ -1,0 +1,264 @@
+<!-- --------------cart items details------------------------------- -->
+<div class="container-cart">
+    {{!-- <div>{{cart.items}}</div> --}}
+    <div class="cartlist">
+        <div class="formcontainerCart">
+            {{#iif cart.items.length '==' 0}}
+            <h2>No Item in shopping cart</h2>
+            {{else}}
+            <h2>Shopping Cart Details</h2>
+
+            
+            {{#each cart.items }}
+            {{!-- {{#each racketId}} --}}
+            <div class="col-cart"  >
+                <div id="mainImage">
+                    {{!-- {{#racketId}} --}}
+                    <img src="{{racketId.c_FolderName}}/{{racketId.c_mainImageName}} " class="cartimg">
+                    <div id="rktnamedetails">
+                        <div style="font-size: large;">{{racketId.c_Rkt_Name}}</div>
+                        <div style="font-size: ;small;width:444px">{{racketId.c_Rkt_Desc}}</div>
+                        <input type="hidden" id="delivery_{{racketId._id}}"  value="200">
+                        {{!-- <div>{{c_Rkt_Desc}}</div> --}}
+                        <div >
+                            <small>Price Rs.</small>
+                            <small id="totalprice_{{racketId._id}}" style="font-weight:bold;">{{operations qty "*" racketId.i_Price}} </small>
+                            <input type="hidden" id="id_price_{{racketId._id}}" name="id_price" value={{racketId.i_Price}}>
+
+                        </div>
+                        {{#iif racketId.i_Sale_Status '==' 1}}
+                        <div style="font-size: small;"> In Stock </div>
+                        <br>
+                        {{/iif}}
+                        <div style="display: flex">
+
+                            <form action="/remove-from-cart" method="POST" name="form">
+                                <button type="submit" id="minus_{{racketId._id}}" value="{{racketId._id}}"  class="plusminusbutton"  onclick="removeClick_new(this.id)" value="sayali"
+                                   >-</button>
+                                <input type="hidden" id="id_cart_{{racketId._id}}" name="id_remvoe_cart" value={{racketId._id}}>
+                            </form>
+                            <div id="input-cart_{{racketId._id}}" style="height:28px;margin-left:11px;" data-count='{{qty}}'>
+                                {{qty}}
+                            </div>
+
+                            <form action="/add-to-cart" method="POST" name="form" style=" margin-left:11px;">
+                                <button type="submit" id="plus_{{racketId._id}}" onclick="addClick_new(this.id)" value="{{racketId._id}}" class="plusminusbutton">+</button>
+                                <input type="hidden" id="id_cart_{{racketId._id}}" name="id_cart" value={{racketId._id}}>
+
+                            </form>
+                        </div>
+                        
+
+                    </div>
+                    
+                </div>
+
+                {{!-- <div>
+
+                </div> --}}
+                </div>
+                {{/each}}
+                {{!-- {{/each}} --}}
+
+            
+            {{/iif}}
+        </div>
+        {{!-- <div class="total-price " style="width:1000px">
+            <table>
+                <tr>
+                    <td >Total To Pay</td>
+                    {{#cart}}
+                    <td id="subtotal" value="{{totalprice}}">{{totalprice}}</td>
+                    {{/cart}}
+
+                </tr>
+                <tr>
+                    <td >Delivery Charges</td>
+                    <td id="delivery">200</td>
+                </tr>
+
+                <tr>
+                    <td style="width: 383px;">Total</td>
+                    {{#cart}}
+                    <td id="subtotalplusdelivery">Rs.{{operations totalprice '+' 200}}</td>
+                    {{/cart}}
+                </tr>
+            </table>
+        </div> --}}
+    </div>
+    {{#iif cart.items.length '>' 0}}
+        <div id="subtotaldetails" >
+            <div style="display: flex;flex-direction:column; margin-left=5px;">
+            {{#cart}}
+            <div style="display:flex ; flex-direction:row; margin-bottom:10px">
+                <div class="titledesc">Total : </div>
+                <div>Rs.       </div>
+                <div id="subtotal" style="margin-left: 10px;" value="{{totalprice}}">{{totalprice}} </div>
+            </div> 
+                
+             {{!-- </div> --}}
+             <div style="display:flex ; flex-direction:row;margin-bottom:10px ">
+
+                <div  class="titledesc" >Delivery Charge</div>
+                <div>Rs.       </div>
+                {{!-- <div id="delivery" value='200' style="margin-left: 10px;color:green;font-weight:bold;" >200</div> --}}
+                <div id="deliveryId" style="margin-left: 10px;color:green;font-weight:bold;" value="200">200</div>
+                 
+             </div>
+             <div style="display:flex ; flex-direction:row;margin-bottom:10px">
+                <div  class="titledesc"><b> Total Amount :</b id="subtotal_2">
+               </div> <div>Rs.       </div>
+                <div id="subtotal_2" style="margin-left: 10px;font-weight: bold;"> {{operations totalprice '+' 200}}</div></div>
+                </div>
+             <button type="submit" onclick="onbuy()" id="buy" class="btn-cart">Buy</button>
+            
+             </div>
+             {{/cart}}
+            
+            </div>
+        </div>
+    {{/iif}}
+</div>
+<script>
+    var noti=document.getElementById('cartcount');
+    var listArr=[];
+   // console.log(event.target.id);
+   function removeClick_new(clicked_id){
+    //console.log(racketId);
+    var idCart =document.getElementById(clicked_id);
+   
+    //console.log(clicked_id);
+    var inputcartId="input-cart_" + idCart.value;
+    //console.log(idCart.value);
+    var inputcart=document.getElementById(inputcartId);
+    var countItemwise=Number(inputcart.getAttribute('data-count'));
+    //document.getElementById(inputcartId);
+    var countItemwise=Number(inputcart.getAttribute('data-count'));
+    var countTotal=Number(noti.getAttribute('data-count')||0);
+    var subtotal=document.getElementById('subtotal');
+    
+    countItemwise=countItemwise-1;
+    countTotal=countTotal-1;
+    if (countItemwise<0){
+        countItemwise=0
+      
+    } 
+    if (countTotal<0){
+        countTotal=0
+          
+    }
+    if (countTotal<=0){
+    
+        document.getElementById('subtotaldetails').hidden=true;
+        console.log(document.getElementById('subtotaldetails').hidden);
+    }
+
+    //store racketid
+    listArr.push(idCart.value);
+    inputcart.setAttribute('data-count',countItemwise);
+    
+    inputcart.innerText=countItemwise;
+    //console.log(document.getElementById('id_price_' + idCart.value));
+    document.getElementById('totalprice_' + idCart.value).innerText=countItemwise*Number(document.getElementById('id_price_' + idCart.value).value);
+    document.getElementById('subtotaldetails').hidden=false
+    var subtotalamount=Number(subtotal.innerText)-Number(document.getElementById('id_price_' + idCart.value).value);
+    if ( subtotalamount>0){
+        subtotal.innerText=Number(subtotal.innerText)-Number(document.getElementById('id_price_' + idCart.value).value);
+        document.getElementById('subtotal_2').innerText= Number(subtotal.innerText)+Number(document.getElementById('delivery_' + idCart.value).value);
+    }else
+    {
+        subtotal.innerText=""
+        document.getElementById('subtotal_2').innerText="";
+        document.getElementById('deliveryId').innerText="";
+    }
+    //document.getElementById('subtotal_2').innerText=subtotal.innerText;
+//    document.getElementById('subtotalplusdelivery').innerText=Number(subtotal.innerText)+Number(document.getElementById('delivery').innerText);
+    //subtotal_2
+    
+    //document.getElementById('subtotalplusdelivery')=+subtotal.value+document.getElementById('delivery');
+    
+    if ((countTotal)<0) {
+    
+        noti.setAttribute('data-count',0);
+        //window.location.href="index.html";
+    }else{
+        noti.setAttribute('data-count',countTotal);
+    }
+
+
+
+    if (inputcart.innerText==""||inputcart.innerText==null){
+        noti.classList.remove('zero');
+
+    }
+    
+
+}
+function addClick_new(clicked_id){
+      var idCart =document.getElementById(clicked_id);
+  
+    var inputcartId="input-cart_" + idCart.value;
+    var inputcart=document.getElementById(inputcartId);
+    var countItemwise=Number(inputcart.getAttribute('data-count'));
+    var countTotal=Number(noti.getAttribute('data-count')||0);
+    var subtotal=document.getElementById('subtotal');
+
+    countItemwise=countItemwise+1;
+    countTotal=countTotal+1;
+    //store racketid
+    listArr.push(idCart.value);
+    inputcart.setAttribute('data-count',countItemwise);
+    inputcart.innerText=countItemwise;
+    document.getElementById('totalprice_' + idCart.value).innerText=countItemwise*Number(document.getElementById('id_price_' + idCart.value).value);
+    
+    //console.log(subtotal.innerText);
+    subtotal.innerText=Number(subtotal.innerText)+Number(document.getElementById('id_price_' + idCart.value).value);
+    
+    //document.getElementById('subtotalplusdelivery').innerText=Number(subtotal.innerText)+Number(document.getElementById('delivery').innerText);
+    //subtotal_2 delivery
+    //console.log(subtotal.innerText);
+    
+    //console.log(document.getElementById('delivery_' + idCart.value).innerText);
+    document.getElementById('subtotal_2').innerText=Number(subtotal.innerText)+Number(document.getElementById('delivery_' + idCart.value).value);
+
+    if ((countTotal)<0) {
+    
+        noti.setAttribute('data-count',0);
+    }else{
+        noti.setAttribute('data-count',countTotal);
+    }
+
+
+
+    if (inputcart.innerText==""||inputcart.innerText==null){
+        noti.classList.remove('zero');
+
+    }
+    
+   }
+</script>
+
+<script>
+
+    window.addEventListener('load', function () {
+        {
+            {
+
+                var arrproductList = [];
+                arrproductList = cartarray.value;
+                //console.log(arrproductList);
+
+                return arrproductList--
+
+
+
+
+            }
+        }
+    })
+
+    function onbuy() {
+        alert('Please contact Mr. Sandeep surve 9890895464')
+    }
+</script>
+

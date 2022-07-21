@@ -1,0 +1,157 @@
+<!-- ----------------account page------------------ -->
+        <div class="account-page">
+            <div class="container">
+                <div class="row">
+                    {{!-- <div class="col_2">
+
+                        <img src="images/login.jpg" width="100%">
+                    </div> --}}
+
+                    <div class="col_2">
+                        <div class="form-container" id="formcontainer">
+                            <div class="form-btn">
+                                <span onclick="login()" >Login</span>
+                                <span onclick="register()">Register</span>
+                                 {{#if regiseter}}
+                                    <hr id="Indicator" style="transform:translate(100px);"> 
+                                 {{else}}
+                                    <hr id="Indicator" style="transform:translate(0px);"> 
+                                 {{/if}}   
+                            </div>
+                            {{#if regiseter}}
+                                 <form id="LoginForm" action="/login" method="post" style="transform:translate(0px);">
+                            {{else}}
+                                <form id="LoginForm" action="/login" method="post" style="transform:translate(300px);">
+                            {{/if}}                        
+                             {{!-- <form action="/signup" method="post"></form> --}}
+                                {{!-- <form id="LoginForm" action="/login" method="post"> --}}
+                                    
+                                    <label id="lbloginfail" style="color: red;" >{{ErrorMessage}}</label>
+                                    <input type="text" placeholder="User Login or mobile" name="userlogin" id="userlogin" value={{userlogin}}>
+                                    <input type="password" placeholder="Password" name="password" autocomplete="off">
+                                    <button type="submit" class="btn-signup" >Login</button>
+                                    
+                                    <input type="checkbox" class="checkboxInput" name="rememberme" id="rememberme" placeholder="Remember me" checked>
+                                    <label for="rememberme">Remember Me</label>
+                                    <p><a href="/user/forgot-password">Forgot Password</a></p>
+                                    {{!-- <div   id='labelUserReg'>Forgot Password</div> --}}
+                                    {{!-- <a href="" onclick="register()">New User Register.</a> --}}
+                                    <div  onclick="register()" id='labelUserReg'>New User Register</div>
+                                    {{!-- <span onclick="register()">New User Register</span> --}}
+                                </form>
+                                {{!-- action="/register" --}}
+                            {{#if regiseter}}
+                                 <form id ="RegForm"  method="post" action="/register"  style="transform:translate(0px);">
+                            {{else}}
+                                <form id ="RegForm"  method="post" action="/register"  style="transform:translate(300px);">
+                            {{/if}}                        
+          
+                                {{!-- <form  id ="RegForm"  method="post" action="/register" > --}}
+                                    {{!-- <input type="text" placeholder="Username"> --}}
+                                    <label id="lbloginfail" style="color: red;" >{{ErrorMessage2}}</label>
+                                    <input type="text" id="username1" name="username1" placeholder="User Name" value="{{username1}}">
+                                     <input type="text" id="userlogin1" name="userlogin1" placeholder="User Login Name " value="{{userlogin1}}">
+                                     <input type="email" id="email1" name="email" placeholder="Email" value="{{email}}">
+                                     <input type="number" id="mobile1" name="mobile" placeholder="Mobile" value="{{mobile}}"> 
+                                     <div style="display: flex;">
+                                        <input type="password" autocomplete="off" id="password1" name="password" placeholder="Password">
+                                        <img src="/images/eye-password.png" onclick="showpassword()"  alt="">
+                                     </div>
+                                     <input type="password" autocomplete="off" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password">
+                                    <input type="checkbox" value="false" id="isSelling">
+                                    <button type="submit"  class="btn-signup">Register</button>
+                                    
+                                    <div  onclick="login()" id='labelUserReg'>LogIn</div>
+                                </form>
+                            
+                        </div>
+                      <div class="form-container-otp" id ="formcontainerotp" hidden >
+                            <form action="/register" method="post" onsubmit="return validateForm()" 
+                                        name="form">
+                                    <label id="lbOtpwrong" >{{ErrorMessageotp}}</label>
+                                    <label id="lbOtp" >{{otpmsg}}</label>
+                                <label for="otp">OTP</label>
+                                <input type="number" placeholder="Enter OTP send to Your Email." name="otp">
+                                {{!-- <button type="submit" class="btnSave" id="btncontinue">Continue</button>   --}}
+                                <button type="submit" id="btncontinue" class="btnContinue">Continue</button>
+
+                            </form>
+                        </div>
+                   
+                   
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+<!-- ----------------Js for toggle from------------- -->
+<script>
+    var LoginForm=document.getElementById("LoginForm");
+    var RegForm=document.getElementById("RegForm");
+    var Indicator=document.getElementById("Indicator");
+        //RegForm.style.transform="translateX(300px)";    
+        //LoginForm.style.transform="translateX(300px)";    
+        //Indicator.style.transform="translateX(0px)";
+    
+
+    function register(){
+        console.log('register');
+        
+        RegForm.style.transform="translateX(0px)";    
+        LoginForm.style.transform="translateX(0px)";    
+        Indicator.style.transform="translateX(100px)";    
+    }
+    function login(){
+        //console.log('login' + RegForm.style.transform);
+        //LoginForm.setAttribute
+        
+        RegForm.style.transform="translateX(300px)";    
+        LoginForm.style.transform="translateX(300px)";    
+        Indicator.style.transform="translateX(0px)";    
+    }
+    //check otp entered
+    //var formcontainer=document.getElementById('formcontainer');
+    //var formcontainerotp=document.getElementById('formcontainerotp');
+    //function Check(lclickregister){
+    //    if (lclickregister=true){
+    //        formcontainer.hidden=true;
+    //        formcontainerotp.hidden=false;
+    //    }else{
+    //        formcontainer.hidden=false;
+    //        formcontainerotp.hidden=true;
+    //    }
+        
+    //}
+    let lbOtp=document.getElementById('lbOtp');
+    function generateOTP() {
+          
+    // Declare a digits variable 
+    // which stores all digits
+    var digits = '0123456789';
+    let OTP = '';
+    for (let i = 0; i < 4; i++ ) {
+        OTP += digits[Math.floor(Math.random() * 10)];
+    }
+    lbOtp.innerText=OTP;
+    //return OTP;
+    }
+
+</script>
+
+<script>
+    let lshow=true;
+    function showpassword(){
+
+        let password1=document.getElementById('password1');
+        if (lshow){
+            password1.type='text';
+            lshow=false;
+        }else{
+            password1.type='password';
+            lshow=true;
+        }
+        
+        
+    }
+
+</script>
