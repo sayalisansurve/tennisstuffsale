@@ -36,7 +36,7 @@ const { render } = require('express/lib/response');
 var nodemailer = require('nodemailer');
 const app = express();
 // hosted webserve port get
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 //setting path
 
 const staticpath = path.join(__dirname, "../public");
