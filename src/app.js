@@ -37,6 +37,8 @@ var nodemailer = require('nodemailer');
 const app = express();
 // hosted webserve port get
 const port = process.env.PORT || 3000;
+const host = '0.0.0.0';
+
 //setting path
 
 const staticpath = path.join(__dirname, "../public");
@@ -903,7 +905,7 @@ let manufacturerList = async function () {
 };
 // ------------------------------------------------------
 //server start
-app.listen(port, () => {
+app.listen(port,host, () => {
     console.log(`server is running at port no ${port}`);
 
 })
